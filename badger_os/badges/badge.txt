@@ -1,7 +1,9 @@
-mustelid inc
-H. Badger
-RP2040
-2MB Flash
-E ink
-296x128px
-/badges/badge.jpg
+Volunteer
+Thadigus
+Thad Turner
+
+turnerservices.cloud
+
+/badges/tt-logo.jpg
+/badges/qr-code.jpg
+/badges/fw-logo.jpg

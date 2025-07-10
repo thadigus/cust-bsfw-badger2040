@@ -133,14 +133,24 @@ except OSError:
         f.flush()
     badge = open(BADGE_PATH, "r")
 
-# Read in the next 6 lines
+# Read in the next 6 lines - Keeping this for backwards compatability...
 company = badge.readline()        # "mustelid inc"
 name = badge.readline()           # "H. Badger"
 detail1_title = badge.readline()  # "RP2040"
 detail1_text = badge.readline()   # "2MB Flash"
 detail2_title = badge.readline()  # "E ink"
 detail2_text = badge.readline()   # "296x128px"
-badge_image = badge.readline()    # /badges/badge.jpg
+
+# Instead of doing a simple readline, read each line of the file into a list so we can reference it later
+with open(BADGE_PATH, "r") as f:
+    content_list = f.readlines()
+    content_list = [x.strip() for x in content_list]
+
+# Sort out the lines 7 and onward to be the list of badge images
+badge_list = content_list[6:]
+# Set the first position image as the badge image to get rolling
+badge_image = badge_list[0]
+
 
 # Truncate all of the text (except for the name as that is scaled)
 company = truncatestring(company, COMPANY_TEXT_SIZE, TEXT_WIDTH)
@@ -164,6 +174,21 @@ while True:
     # Sometimes a button press or hold will keep the system
     # powered *through* HALT, so latch the power back on.
     display.keepalive()
+    
+    # During each loop, check for Button A or Button C to be pressed
+    if display.pressed(badger2040.BUTTON_A) or display.pressed(badger2040.BUTTON_C):
+        # Take curernt list position into a variable
+        pos = badge_list.index(badge_image)
+        # Loop back around if we're on the last position of the list
+        if pos >= (len(badge_list) - 1):
+            pos = 0
+        else:
+        # If not the last position in the list, simply increment by 1
+            pos = pos + 1
+        # Set new badge image, this will be the image stored in the position we just located
+        badge_image = badge_list[pos]
+        # Redraw the screen to update it
+        draw_badge()
 
     # If on battery, halt the Badger to save power, it will wake up if any of the front buttons are pressed
     display.halt()

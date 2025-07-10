@@ -1,4 +1,11 @@
-# Badger 2040 & Badger 2040 W <!-- omit in toc -->
+# BSides Fort Wayne Custom Badger Firmware - Badger 2040 & Badger 2040 W!
+
+This year I spent some time at the badge hacking village at [BSides Fort Wayne](https://bsidesfortwayne.org/). Even though I have attended conferences with hackable badges in the past, I've never been able to participate. Hardware hacking has been a recent interest and so this year I decided to try it out. 
+
+My primary goal was to modify my badge to show my logo on the front instead of the default logo provided by the conference. After this I added the original logo and a QR code to a list of images to rotate through. Then I built the code to allow the device to handle button presses that would cycle through the list.
+
+I will keep the original README.md below in case anyone else stumbles across this repo and it might help. I did not touch the underlying firmware that can be found in `/firmware`. All of my code is in `/badger_os`, and specifically in the examples folder.
+
 ## Firmware, Examples & Documentation <!-- omit in toc -->
 
 Badger 2040 and Badger 2040 W are maker-friendly all-in-one badge wearables, featuring a 2.9", 296x128 pixel, monochrome e-paper display.
